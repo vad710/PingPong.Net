@@ -10,7 +10,7 @@ namespace PingPong.net
         /// </summary>
         static void Main(string[] args)
         {
-            using (Game1 game = new Game1())
+            using (PingPongGame game = new PingPongGame())
             {
                 game.Run();
             }

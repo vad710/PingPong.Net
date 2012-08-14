@@ -8,13 +8,14 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using PingPong.Screens;
 
 namespace PingPong.net
 {
     /// <summary>
     /// This is the main type for your game
     /// </summary>
-    public class Game1 : Microsoft.Xna.Framework.Game
+    public class PingPongGame : Microsoft.Xna.Framework.Game
     {
 
         //TODO: Keep Track of who should serve
@@ -23,20 +24,11 @@ namespace PingPong.net
 
         GraphicsDeviceManager _graphics;
         SpriteBatch _spriteBatch;
-        SpriteFont _scoreFont;
-        Vector2 _screenCenter;
+        ScreenManager _screenManager;
 
-        Vector2 _p1ScorePosition;
-        Vector2 _p2ScorePosition;
+        //Vector2 _screenCenter;
 
-        int _p1Score = 0;
-        int _p2Score = 0;
-
-        bool _isScoreUpdating = false;
-
-        Color _scoreColor = Color.OrangeRed;
-
-        public Game1()
+        public PingPongGame()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -64,12 +56,13 @@ namespace PingPong.net
             // Create a new SpriteBatch, which can be used to draw textures.
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            _scoreFont = Content.Load<SpriteFont>("ScoreBoard");
+            ///Creates the screen manager and adds screens
+            _screenManager = new ScreenManager();
+            _screenManager.Add(new ScoreScreen("ScoreBoard"));
 
-            _p1ScorePosition = new Vector2(_graphics.GraphicsDevice.Viewport.Width / 4, _graphics.GraphicsDevice.Viewport.Height / 2);
-            _p2ScorePosition = new Vector2((_graphics.GraphicsDevice.Viewport.Width / 4)*3, _graphics.GraphicsDevice.Viewport.Height / 2);
             
-            //_screenCenter = new Vector2(_graphics.GraphicsDevice.Viewport.Width / 2, _graphics.GraphicsDevice.Viewport.Height / 2);
+            _screenManager.LoadContent(this.Content, _graphics);
+
         }
 
         /// <summary>
@@ -92,32 +85,7 @@ namespace PingPong.net
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
-            var keyboardState = Keyboard.GetState();
-
-            if (!_isScoreUpdating)
-            {
-                if (keyboardState.IsKeyDown(Keys.D1))
-                {
-                    _p1Score++;
-                    _isScoreUpdating = true;
-                }
-                else if (keyboardState.IsKeyDown(Keys.D2))
-                {
-                    _p2Score++;
-                    _isScoreUpdating = true;
-                }
-                else if (keyboardState.IsKeyDown(Keys.R))
-                {
-                    _p1Score = 0;
-                    _p2Score = 0;
-                    _isScoreUpdating = true;
-                }
-            }
-            else
-            {
-                if (keyboardState.GetPressedKeys().Count() == 0)
-                    _isScoreUpdating = false;
-            }
+            _screenManager.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -132,18 +100,9 @@ namespace PingPong.net
 
             _spriteBatch.Begin();
 
-            string p1Score = _p1Score.ToString("00");
-            string p2Score = _p2Score.ToString("00");
-            
+            //Draws the active screen
+            _screenManager.Draw(gameTime, _spriteBatch);
 
-            Vector2 textCenter = _scoreFont.MeasureString(p1Score) / 2;
-            _spriteBatch.DrawString(_scoreFont, p1Score, _p1ScorePosition, _scoreColor, 0, textCenter, 1f, SpriteEffects.None, 0);
-
-            textCenter = _scoreFont.MeasureString(p2Score) / 2;
-            _spriteBatch.DrawString(_scoreFont, p2Score, _p2ScorePosition, _scoreColor, 0, textCenter, 1f, SpriteEffects.None, 0);
-
-
-            
 
             _spriteBatch.End();
 
