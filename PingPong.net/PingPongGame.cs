@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using PingPong.Screens;
 
-namespace PingPong.net
+namespace PingPong
 {
     /// <summary>
     /// This is the main type for your game
@@ -59,6 +59,7 @@ namespace PingPong.net
             ///Creates the screen manager and adds screens
             _screenManager = new ScreenManager();
             _screenManager.Add(new StartScreen());
+            _screenManager.Add(new PlayerInputScreen());
             _screenManager.Add(new ScoreScreen());
 
             

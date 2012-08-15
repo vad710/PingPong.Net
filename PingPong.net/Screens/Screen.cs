@@ -17,7 +17,7 @@ namespace PingPong
     /// <summary>
     /// Represents one screen in the Game
     /// </summary>
-    public abstract class Screen
+    public abstract class Screen : IDraw
     {
 
         protected SpriteFont _textFont;
