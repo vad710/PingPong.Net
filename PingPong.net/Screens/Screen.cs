@@ -20,7 +20,9 @@ namespace PingPong
     public abstract class Screen
     {
 
-        ChangeScreen _changeScreen;
+        protected SpriteFont _textFont;
+        protected Color _textColor = Color.OrangeRed;
+        protected Vector2 _screenCenter;
 
         /// <summary>
         /// Creates a new screen with the specified name
@@ -41,7 +43,11 @@ namespace PingPong
         /// Loads content required for this screen
         /// </summary>
         /// <param name="content"></param>
-        public abstract void LoadContent(ContentManager content, GraphicsDeviceManager graphics);
+        public virtual void LoadContent(ContentManager content, GraphicsDeviceManager graphics)
+        {
+            _textFont = content.Load<SpriteFont>("ScoreBoard");
+            _screenCenter = new Vector2(graphics.GraphicsDevice.Viewport.Width / 2, graphics.GraphicsDevice.Viewport.Height / 2);
+        }
 
         /// <summary>
         /// Updates the screen
@@ -62,8 +68,14 @@ namespace PingPong
         /// <param name="name"></param>
         protected void ChangeScreen(string name)
         {
-            if (_changeScreen != null)
-                _changeScreen(name);
+            
         }
+
+        /// <summary>
+        /// Changes to the next screen
+        /// </summary>
+        public Action NextScreen;
+
+
     }
 }

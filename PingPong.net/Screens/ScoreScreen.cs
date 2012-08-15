@@ -21,29 +21,30 @@ namespace PingPong.Screens
     public class ScoreScreen : Screen
     {
 
-        SpriteFont _scoreFont;
+
         Vector2 _p1ScorePosition;
         Vector2 _p2ScorePosition;
         int _p1Score = 0;
         int _p2Score = 0;
-        Color _scoreColor = Color.OrangeRed;
+
         bool _isScoreUpdating = false;
 
         /// <summary>
         /// Creates a new Score Screen
         /// </summary>
         /// <param name="name"></param>
-        public ScoreScreen(string name) : base(name)
+        public ScoreScreen() : base("ScoreScreen")
         {
             //Should we make a singleton?
         }
 
         public override void LoadContent(ContentManager content, GraphicsDeviceManager graphics)
         {
-            _scoreFont = content.Load<SpriteFont>("ScoreBoard");
-
             _p1ScorePosition = new Vector2(graphics.GraphicsDevice.Viewport.Width / 4, graphics.GraphicsDevice.Viewport.Height / 2);
             _p2ScorePosition = new Vector2((graphics.GraphicsDevice.Viewport.Width / 4) * 3, graphics.GraphicsDevice.Viewport.Height / 2);
+            
+            
+            base.LoadContent(content, graphics);
         }
 
         public override void Update(GameTime gameTime)
@@ -82,11 +83,11 @@ namespace PingPong.Screens
             string p2Score = _p2Score.ToString("00");
 
 
-            Vector2 textCenter = _scoreFont.MeasureString(p1Score) / 2;
-            spriteBatch.DrawString(_scoreFont, p1Score, _p1ScorePosition, _scoreColor, 0, textCenter, 1f, SpriteEffects.None, 0);
+            Vector2 textCenter = _textFont.MeasureString(p1Score) / 2;
+            spriteBatch.DrawString(_textFont, p1Score, _p1ScorePosition, _textColor, 0, textCenter, 1f, SpriteEffects.None, 0);
 
-            textCenter = _scoreFont.MeasureString(p2Score) / 2;
-            spriteBatch.DrawString(_scoreFont, p2Score, _p2ScorePosition, _scoreColor, 0, textCenter, 1f, SpriteEffects.None, 0);
+            textCenter = _textFont.MeasureString(p2Score) / 2;
+            spriteBatch.DrawString(_textFont, p2Score, _p2ScorePosition, _textColor, 0, textCenter, 1f, SpriteEffects.None, 0);
         }
     }
 }

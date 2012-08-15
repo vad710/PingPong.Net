@@ -58,7 +58,8 @@ namespace PingPong.net
 
             ///Creates the screen manager and adds screens
             _screenManager = new ScreenManager();
-            _screenManager.Add(new ScoreScreen("ScoreBoard"));
+            _screenManager.Add(new StartScreen());
+            _screenManager.Add(new ScoreScreen());
 
             
             _screenManager.LoadContent(this.Content, _graphics);

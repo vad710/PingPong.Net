@@ -20,6 +20,7 @@ namespace PingPong
     public class ScreenManager
     {
         private Dictionary<string, Screen> _screens = new Dictionary<string, Screen>();
+        private List<string> _screenPositions = new List<string>();
         private Screen _activeScreen;
 
         /// <summary>
@@ -29,7 +30,9 @@ namespace PingPong
         public void Add(Screen screen)
         {
             _screens.Add(screen.Name, screen);
-            //TODO: Need to hookup delegate to change screen
+            _screenPositions.Add(screen.Name);
+
+            screen.NextScreen = ()=> NextScreen();
         }
 
         /// <summary>
@@ -78,12 +81,23 @@ namespace PingPong
             }
         }
 
+        public void NextScreen()
+        {
+            //TODO: Is there a way of doing this without having to keep a dictionary AND a list?
+            var nextPosition = _screenPositions.IndexOf(this.ActiveScreen.Name) + 1;
+            
+            if (nextPosition > _screenPositions.Count)
+                nextPosition = 0;
+
+            _activeScreen = _screens[_screenPositions[nextPosition]];
+            
+        }
 
     }
 
-    /// <summary>
-    /// Delegate that changes the current screen
-    /// </summary>
-    /// <param name="name"></param>
-    public delegate void ChangeScreen(string name);
+    ///// <summary>
+    ///// Delegate that changes the current screen
+    ///// </summary>
+    ///// <param name="name"></param>
+    //public delegate void ChangeScreen(string name);
 }
