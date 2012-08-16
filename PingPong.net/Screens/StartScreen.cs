@@ -26,11 +26,9 @@ namespace PingPong.Screens
 
         }
 
-        public override void Update(Microsoft.Xna.Framework.GameTime gameTime)
+        public override void Update(Microsoft.Xna.Framework.GameTime gameTime, KeyboardHelper keyboard)
         {
-            var keyboardState = Keyboard.GetState();
-
-            if (keyboardState.IsKeyDown(Keys.Space))
+            if (keyboard.KeyPressedOnce(Keys.Space))
                 this.NextScreen();
         }
 

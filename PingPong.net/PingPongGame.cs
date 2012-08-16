@@ -26,6 +26,8 @@ namespace PingPong
         SpriteBatch _spriteBatch;
         ScreenManager _screenManager;
 
+        KeyboardHelper _keyboard = new KeyboardHelper();
+
         //Vector2 _screenCenter;
 
         public PingPongGame()
@@ -59,7 +61,7 @@ namespace PingPong
             ///Creates the screen manager and adds screens
             _screenManager = new ScreenManager();
             _screenManager.Add(new StartScreen());
-            _screenManager.Add(new PlayerInputScreen());
+            //_screenManager.Add(new PlayerInputScreen());
             _screenManager.Add(new ScoreScreen());
 
             
@@ -87,7 +89,7 @@ namespace PingPong
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
-            _screenManager.Update(gameTime);
+            _screenManager.Update(gameTime, _keyboard);
 
             base.Update(gameTime);
         }

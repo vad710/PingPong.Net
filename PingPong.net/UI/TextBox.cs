@@ -22,10 +22,12 @@ namespace PingPong.UI
         SpriteFont _font;
         Color _color;
 
+        string _label;
         StringBuilder _theText = new StringBuilder();
 
-        public TextBox(SpriteFont font, Color color)
+        public TextBox(string label, SpriteFont font, Color color)
         {
+            _label = label;
             _font = font;
             _color = color;
         }
@@ -49,13 +51,11 @@ namespace PingPong.UI
             
         }
 
-        public void Update(Microsoft.Xna.Framework.GameTime gameTime)
+        public void Update(Microsoft.Xna.Framework.GameTime gameTime, KeyboardHelper keyboard)
         {
             if (this.HasFocus)
             {
-                var keyboardState = Keyboard.GetState();
-
-                var pressedKeys = keyboardState.GetPressedKeys();
+                var pressedKeys = keyboard.KeysPressedOnce(); //keyboardState.GetPressedKeys();
 
                 foreach (var key in pressedKeys)
                 {
@@ -63,7 +63,12 @@ namespace PingPong.UI
                     switch (key)
                     {
                         case Keys.Back:
-                            _theText.Remove(_theText.Length, 1);
+                            if (_theText.Length > 0)
+                                _theText.Remove(_theText.Length-1, 1);
+                            break;
+
+                        case Keys.Space:
+                            _theText.Append(' ');
                             break;
                         case Keys.A:
                             _theText.Append('A');
@@ -141,7 +146,7 @@ namespace PingPong.UI
                             _theText.Append('Y');
                             break;
                         case Keys.Z:
-                            _theText.Append('V');
+                            _theText.Append('Z');
                             break;
                         default:
                             break;
@@ -156,13 +161,12 @@ namespace PingPong.UI
         {
             if (this.HasFocus)
             {
+
                 //TODO: Draw Blinking Cursor
             }
 
 
-            spriteBatch.DrawString(_font, _theText.ToString(), this.Position, _color,0f,Vector2.Zero,0.1f, SpriteEffects.None,0f);
-
-            //TODO: Draw the string's contents
+            spriteBatch.DrawString(_font, _label + _theText.ToString(), this.Position, _color,0f,Vector2.Zero,0.1f, SpriteEffects.None,0f);
         }
 
         #endregion
@@ -173,6 +177,11 @@ namespace PingPong.UI
         internal void SetFocus()
         {
             this.HasFocus = true;
+        }
+
+        internal void RemoveFocus()
+        {
+            this.HasFocus = false;
         }
     }
 }

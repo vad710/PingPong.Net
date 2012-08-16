@@ -17,7 +17,7 @@ namespace PingPong
     /// <summary>
     /// Managers different screens in the game
     /// </summary>
-    public class ScreenManager
+    public class ScreenManager : IDraw
     {
         private Dictionary<string, Screen> _screens = new Dictionary<string, Screen>();
         private List<string> _screenPositions = new List<string>();
@@ -62,9 +62,9 @@ namespace PingPong
         /// Updates the Active Screen
         /// </summary>
         /// <param name="gameTime"></param>
-        public void Update(GameTime gameTime)
+        public void Update(GameTime gameTime, KeyboardHelper keyboard)
         {
-            this.ActiveScreen.Update(gameTime);
+            this.ActiveScreen.Update(gameTime, keyboard);
         }
 
         /// <summary>

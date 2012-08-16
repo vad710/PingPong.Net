@@ -53,7 +53,7 @@ namespace PingPong
         /// Updates the screen
         /// </summary>
         /// <param name="gameTime"></param>
-        public abstract void Update(GameTime gameTime);
+        public abstract void Update(GameTime gameTime, KeyboardHelper keyboard);
 
 
         /// <summary>

@@ -30,7 +30,7 @@ using Microsoft.Xna.Framework;
         /// Allows this object to Update itself
         /// </summary>
         /// <param name="gameTime"></param>
-        void Update(GameTime gameTime);
+        void Update(GameTime gameTime, KeyboardHelper keyboard);
 
 
         /// <summary>

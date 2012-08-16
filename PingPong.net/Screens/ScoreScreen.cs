@@ -27,8 +27,6 @@ namespace PingPong.Screens
         int _p1Score = 0;
         int _p2Score = 0;
 
-        bool _isScoreUpdating = false;
-
         /// <summary>
         /// Creates a new Score Screen
         /// </summary>
@@ -47,34 +45,13 @@ namespace PingPong.Screens
             base.LoadContent(content, graphics);
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime, KeyboardHelper keyboard)
         {
-            var keyboardState = Keyboard.GetState();
+            if (keyboard.KeyPressedOnce(Keys.D1))
+                _p1Score++;
 
-            if (!_isScoreUpdating)
-            {
-                if (keyboardState.IsKeyDown(Keys.D1))
-                {
-                    _p1Score++;
-                    _isScoreUpdating = true;
-                }
-                else if (keyboardState.IsKeyDown(Keys.D2))
-                {
-                    _p2Score++;
-                    _isScoreUpdating = true;
-                }
-                else if (keyboardState.IsKeyDown(Keys.R))
-                {
-                    _p1Score = 0;
-                    _p2Score = 0;
-                    _isScoreUpdating = true;
-                }
-            }
-            else
-            {
-                if (keyboardState.GetPressedKeys().Count() == 0)
-                    _isScoreUpdating = false;
-            }
+            if (keyboard.KeyPressedOnce(Keys.D2))
+                _p2Score++;
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
