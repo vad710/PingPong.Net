@@ -18,7 +18,7 @@ namespace PingPong.Screens
     /// </summary>
     public class StartScreen : Screen
     {
-        string _startMessage = "   Accelrys PingPong\r\nPress Spacebar to Start";
+        string _startMessage = " Accelrys PingPong\r\nPress Enter to Start";
         Vector2 _messageOrigin;
 
         public StartScreen() : base("StartScreen")
@@ -28,7 +28,7 @@ namespace PingPong.Screens
 
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime, KeyboardHelper keyboard)
         {
-            if (keyboard.KeyPressedOnce(Keys.Space))
+            if (keyboard.KeyPressedOnce(Keys.Enter))
                 this.NextScreen();
         }
 

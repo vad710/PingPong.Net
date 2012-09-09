@@ -61,7 +61,7 @@ namespace PingPong
             ///Creates the screen manager and adds screens
             _screenManager = new ScreenManager();
             _screenManager.Add(new StartScreen());
-            //_screenManager.Add(new PlayerInputScreen());
+            _screenManager.Add(new PlayerInputScreen());
             _screenManager.Add(new ScoreScreen());
 
             
@@ -113,5 +113,15 @@ namespace PingPong
 
             base.Draw(gameTime);
         }
+    }
+
+    /// <summary>
+    /// Temporary Class to allow for inter-screen communication
+    /// </summary>
+    public static class Global
+    {
+        //TODO: Remove the need for this class!
+        public static string Player1Name;
+        public static string Player2Name;
     }
 }

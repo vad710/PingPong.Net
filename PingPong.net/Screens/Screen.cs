@@ -50,6 +50,13 @@ namespace PingPong
         }
 
         /// <summary>
+        /// Called when this screen becomes the active screen
+        /// </summary>
+        public virtual void Activate()
+        {
+        }
+
+        /// <summary>
         /// Updates the screen
         /// </summary>
         /// <param name="gameTime"></param>

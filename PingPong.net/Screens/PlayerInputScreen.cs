@@ -43,7 +43,19 @@ namespace PingPong.Screens
 
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime, KeyboardHelper keyboard)
         {
-            bool switchFocus = keyboard.KeyPressedOnce(Keys.Tab) || keyboard.KeyPressedOnce(Keys.Enter);
+            bool enterPressed = keyboard.KeyPressedOnce(Keys.Enter);
+
+            if (enterPressed && _player1Name.Text.Length > 0 && _player2Name.Text.Length > 0)
+            {
+                Global.Player1Name = _player1Name.Text;
+                Global.Player2Name = _player2Name.Text;
+
+                this.NextScreen();
+                return;
+            }
+
+
+            bool switchFocus = keyboard.KeyPressedOnce(Keys.Tab) || enterPressed;
 
             if (switchFocus)
             {

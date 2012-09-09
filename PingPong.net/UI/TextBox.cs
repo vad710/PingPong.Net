@@ -25,6 +25,11 @@ namespace PingPong.UI
         string _label;
         StringBuilder _theText = new StringBuilder();
 
+        int _lastBlinkTime = 0;
+        string _blinker = string.Empty;
+
+        private const int _blinkSpeed = 400;
+
         public TextBox(string label, SpriteFont font, Color color)
         {
             _label = label;
@@ -66,89 +71,18 @@ namespace PingPong.UI
                             if (_theText.Length > 0)
                                 _theText.Remove(_theText.Length-1, 1);
                             break;
-
+                        
                         case Keys.Space:
                             _theText.Append(' ');
                             break;
-                        case Keys.A:
-                            _theText.Append('A');
+                        
+                        case Keys.LeftShift:
+                        case Keys.RightShift:
+                            //ignore
                             break;
-                        case Keys.B:
-                            _theText.Append('B');
-                            break;
-                        case Keys.C:
-                            _theText.Append('C');
-                            break;
-                        case Keys.D:
-                            _theText.Append('D');
-                            break;
-                        case Keys.E:
-                            _theText.Append('E');
-                            break;
-                        case Keys.F:
-                            _theText.Append('F');
-                            break;
-                        case Keys.G:
-                            _theText.Append('G');
-                            break;
-                        case Keys.H:
-                            _theText.Append('H');
-                            break;
-                        case Keys.I:
-                            _theText.Append('I');
-                            break;
-                        case Keys.J:
-                            _theText.Append('J');
-                            break;
-                        case Keys.K:
-                            _theText.Append('K');
-                            break;
-                        case Keys.L:
-                            _theText.Append('L');
-                            break;
-                        case Keys.M:
-                            _theText.Append('M');
-                            break;
-                        case Keys.N:
-                            _theText.Append('N');
-                            break;
-                        case Keys.O:
-                            _theText.Append('O');
-                            break;
-                        case Keys.P:
-                            _theText.Append('P');
-                            break;
-                        case Keys.Q:
-                            _theText.Append('Q');
-                            break;
-                        case Keys.R:
-                            _theText.Append('R');
-                            break;
-                        case Keys.S:
-                            _theText.Append('S');
-                            break;
-                        case Keys.T:
-                            _theText.Append('T');
-                            break;
-                        case Keys.U:
-                            _theText.Append('U');
-                            break;
-                        case Keys.V:
-                            _theText.Append('V');
-                            break;
-                        case Keys.W:
-                            _theText.Append('W');
-                            break;
-                        case Keys.X:
-                            _theText.Append('X');
-                            break;
-                        case Keys.Y:
-                            _theText.Append('Y');
-                            break;
-                        case Keys.Z:
-                            _theText.Append('Z');
-                            break;
+
                         default:
+                            _theText.Append(key.ToString().ToUpper());
                             break;
                     }
 
@@ -159,17 +93,41 @@ namespace PingPong.UI
 
         public void Draw(Microsoft.Xna.Framework.GameTime gameTime, Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch)
         {
+            
             if (this.HasFocus)
             {
+                _lastBlinkTime += gameTime.ElapsedGameTime.Milliseconds;
+                if (_lastBlinkTime > _blinkSpeed)
+                {
+                    _lastBlinkTime -= _blinkSpeed;
 
-                //TODO: Draw Blinking Cursor
+                    if (_blinker == string.Empty)
+                        _blinker = "|";
+                    else
+                        _blinker = string.Empty;
+
+                }
             }
 
 
-            spriteBatch.DrawString(_font, _label + _theText.ToString(), this.Position, _color,0f,Vector2.Zero,0.1f, SpriteEffects.None,0f);
+            spriteBatch.DrawString(_font, string.Concat(_label , _theText.ToString(), _blinker), this.Position, _color,0f,Vector2.Zero,0.1f, SpriteEffects.None,0f);
         }
 
         #endregion
+
+        /// <summary>
+        /// Sets or Gets the value of the TextBox
+        /// </summary>
+        public string Text {
+            get
+            {
+                return _theText.ToString();
+            } 
+            set
+            {
+                _theText = new StringBuilder(value);
+            }
+        }
 
         /// <summary>
         /// Sets the focus on this control
@@ -181,6 +139,7 @@ namespace PingPong.UI
 
         internal void RemoveFocus()
         {
+            _blinker = string.Empty; //make sure the blinker is removed
             this.HasFocus = false;
         }
     }

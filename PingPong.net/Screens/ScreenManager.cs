@@ -75,8 +75,10 @@ namespace PingPong
             get
             {
                 if (_activeScreen == null && _screens.Count > 0)
+                {
                     _activeScreen = _screens.Values.First();
-
+                    _activeScreen.Activate();//TODO: This activate call should be in a property setter
+                }
                 return _activeScreen;
             }
         }
@@ -90,6 +92,7 @@ namespace PingPong
                 nextPosition = 0;
 
             _activeScreen = _screens[_screenPositions[nextPosition]];
+            _activeScreen.Activate(); //TODO: This activate call should be in a property setter
             
         }
 

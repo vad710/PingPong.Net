@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="IDraw.cs" company="Microsoft">
+// <copyright file="IDraw.cs">
 // TODO: Update copyright text.
 // </copyright>
 // -----------------------------------------------------------------------
