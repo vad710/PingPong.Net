@@ -107,6 +107,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Game Data\GameDataHelper.cs" />
+    <Compile Include="Game Data\Match.cs" />
+    <Compile Include="Game Data\MatchDB.cs" />
+    <Compile Include="Game Data\Player.cs" />
+    <Compile Include="Game Data\PlayerDB.cs" />
     <Compile Include="IDraw.cs" />
     <Compile Include="KeyboardHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -156,6 +161,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
   <!--

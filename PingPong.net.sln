@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PingPong.net", "PingPong.net\PingPong.net\PingPong.net.csproj", "{6B37755A-9D09-41BB-B45C-95EDB4D34DFD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PingPong.net", "PingPong.net\PingPong.net.csproj", "{6B37755A-9D09-41BB-B45C-95EDB4D34DFD}"
 EndProject
-Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "PingPong.netContent", "PingPong.net\PingPong.netContent\PingPong.netContent.contentproj", "{187EB51C-551D-4338-BFCE-CDEA2AD9FFFE}"
+Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "PingPong.netContent", "PingPong.netContent\PingPong.netContent.contentproj", "{187EB51C-551D-4338-BFCE-CDEA2AD9FFFE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
